@@ -1,10 +1,15 @@
+varying vec3 vColor; 
+
 void main() {
   //==== Light point
-  float strength = distance(gl_PointCoord, vec2(0.5));
+  float strength = distance(gl_PointCoord, vec2(0.5)); // 04
   strength = 1.0 - strength;
   strength = pow(strength, 10.0); 
 
-  gl_FragColor = vec4(vec3(strength), 1.0);
+  //==== Final Color
+  vec3 mixColor = mix(vec3(0.0), vColor, strength); // 06
+
+  gl_FragColor = vec4(mixColor, 1.0);
   
   #include <colorspace_fragment>;
 }
@@ -88,7 +93,14 @@ Visual Effect :
 
 
 
-/* *********  
+/* *********  Another way instead of using "mixColor" - Easier way
+
+in index.js 
+  ShaderMaterial part : 
+    - add;   transparent: true,
 
 
-*/
+  Then here:
+
+  gl_FragColor = vec4(vColor, strength);  */
+  
