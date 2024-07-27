@@ -1,7 +1,7 @@
 import GUI from 'lil-gui';
 
 export const debugGUI = (parameters, generateGalaxy) => {
-  const gui = new GUI();
+  const gui = new GUI().close().title('Galaxy');
 
   gui
     .add(parameters, 'count')
