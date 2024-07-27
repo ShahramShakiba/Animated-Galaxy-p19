@@ -1,4 +1,5 @@
 uniform float uSize; // step-01
+uniform float uTime; // 07
 
 attribute float aScale; // s-02
 
@@ -6,6 +7,17 @@ varying vec3 vColor; // 05
 
 void main() {
   vec4 modelPosition = modelMatrix * vec4(position, 1.0);
+
+  //=== Spin
+  float angle = atan(modelPosition.x, modelPosition.z);
+  float distanceToCenter = length(modelPosition.xz);
+
+  float angleOffset = (1.0 / distanceToCenter) * uTime * 0.2;
+  angle += angleOffset;
+
+  modelPosition.x = cos(angle) * distanceToCenter;
+  modelPosition.z = sin(angle) * distanceToCenter;
+  
   vec4 viewPosition = viewMatrix * modelPosition;
   vec4 projectionPosition = projectionMatrix * viewPosition;
 
@@ -61,13 +73,19 @@ void main() {
 
 
 
-/* *********  
+/* *********   Spin Part
+  ? atan() stands for arc-tangent
+    - Provide you "angle"
 
 
-*/
+  * float angleOffset = (1.0 / distanceToCenter) * uTime * 0.2;
 
-/* *********  
+    ? 1.0 / distanceToCenter 
+      - only distanceToCenter : 
+        the points around the center spin slowly and vice versa.
+
+      - therefore, we divide it by 1 so the outer-points spin slowly and inner-points spin faster
 
 
-*/
-
+    ? * uTime * 0.2 
+      - offset will bigger with the time pass through and since it's too fast we decrease the speed of the spin */

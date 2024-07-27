@@ -108,6 +108,7 @@ const generateGalaxy = () => {
 
     uniforms: {
       uSize: { value: 15 * renderer.getPixelRatio() },
+      uTime: { value: 0 },
     },
   });
 
@@ -161,6 +162,9 @@ window.addEventListener('resize', onWindowResize);
 //================= Animate ======================
 const tick = () => {
   const elapsedTime = clock.getElapsedTime();
+
+  //=== Update material
+  material.uniforms.uTime.value = elapsedTime;
 
   controls.update();
   renderer.render(scene, camera);
