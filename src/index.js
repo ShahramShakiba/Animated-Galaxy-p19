@@ -5,6 +5,8 @@ I rely on comments to assess the code." */
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import * as THREE from 'three';
 import { debugGUI } from './debugGUI';
+import vertexGalaxy from './Shaders/galaxy/vertex.glsl';
+import fragmentGalaxy from './Shaders/galaxy/fragment.glsl';
 
 const canvas = document.querySelector('canvas.webgl');
 const scene = new THREE.Scene();
@@ -90,12 +92,13 @@ const generateGalaxy = () => {
   geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
 
   //============== Material
-  material = new THREE.PointsMaterial({
-    size: parameters.size,
-    sizeAttenuation: true,
+  material = new THREE.ShaderMaterial({
     depthWrite: false,
     blending: THREE.AdditiveBlending,
     vertexColors: true,
+
+    vertexShader: vertexGalaxy,
+    fragmentShader: fragmentGalaxy,
   });
 
   //============== Point
@@ -155,3 +158,46 @@ const tick = () => {
 };
 
 tick();
+
+/* **************  branchAngle
+ - calculates the angle for positioning branches around a central point (like a tree trunk) in a circular manner.
+
+ ? i % parameters.branches: 
+     - Computes the remainder when i is divided by the total number of branches (parameters.branches). This ensures the value of i cycles through a sequence from 0 to parameters.branches - 1.
+
+ ? ((i % parameters.branches) / parameters.branches): 
+     - Normalizes the remainder to a fraction between 0 and 1 by dividing it by parameters.branches.
+
+ ? * Math.PI * 2: 
+     - Converts the normalized fraction into an angle in radians. multiplying by 2 converts it to a full circle (2π radians or 360 degrees) */
+
+/* **************  Math.pow
+  ? Math.pow(Math.random(), parameters.randomnessPower): 
+    - Raises the random number to the power of parameters.randomnessPower, adjusting how "spread out" the values are. 
+
+  ? Math.random() < 0.5 ? 1 : -1: 
+    - Randomly makes the value positive or negative.
+  
+  ? * parameters.randomness: 
+    - Scales the value by a factor defined by parameters.randomness.
+
+  ? * radius: 
+    - Further scales the value by the given radius.  */
+
+/* ***********  mixedColor.lerp(outsideColor, radius / parameters.radius);
+  ? insideColor.clone(): 
+    - This method creates a new instance (clone) of the insideColor object
+
+  ? mixedColor.lerp(outsideColor, t): 
+    - This function interpolates (blends) between mixedColor and outsideColor.
+
+  ? radius / parameters.radius: 
+    - This calculates the blending factor t, which determines how much of each color to mix. It is the ratio of radius to parameters.radius.  */
+
+/* ************** 
+
+*/
+
+/* ************** 
+
+*/
