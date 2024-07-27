@@ -13,7 +13,8 @@
 ## Animated Galaxy
 <!--------- Video --------->
 
- 
+https://github.com/user-attachments/assets/6e8fe72d-d1ca-4773-b457-9c6c2725c975
+
 <br/> 
 
 ## Overview
@@ -33,12 +34,6 @@
    - Ensures smooth and interactive visualization of the galaxy.
 #### 4. Performance Enhancements: <br/>
    - Includes ambient storm sound for an enhanced immersive experience.
-#### 5. Performance Enhancements: <br/>
-   - Optimized rendering and resource management to maintain high performance.
-#### 6. Pause and Resume: <br/>
-   - Added functionality to pause the animation when the user changes tabs, and resume it when they return.
-#### 7. Destroy Method: <br/>
-   - Implemented a method to clean up resources when the user leaves the page to prevent memory leaks and improve performance.
 
 <br/>
 
@@ -55,7 +50,7 @@
 <br/>
 
 ## Live Demo
-#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Check out the live demo <a href="" target="_blank"> _here_ </a>.
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Check out the live demo <a href="https://animated-galaxy-shaders-shahram.netlify.app/" target="_blank"> _here_ </a>.
 
 
 <br/>
