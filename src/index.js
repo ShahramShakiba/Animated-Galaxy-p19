@@ -15,7 +15,7 @@ let width = window.innerWidth;
 let height = window.innerHeight;
 const clock = new THREE.Clock();
 
-//========= Galaxy
+//=== Galaxy
 const parameters = {
   count: 200000,
   size: 0.005,
@@ -39,11 +39,13 @@ const generateGalaxy = () => {
     scene.remove(points);
   }
 
-  //============== Geometry
+  //========== Geometry
   geometry = new THREE.BufferGeometry();
 
   const positions = new Float32Array(parameters.count * 3);
   const colors = new Float32Array(parameters.count * 3);
+  const scales = new Float32Array(parameters.count * 1);
+  // 1 randomValue per vertex
 
   const insideColor = new THREE.Color(parameters.insideColor);
   const outsideColor = new THREE.Color(parameters.outsideColor);
@@ -79,17 +81,21 @@ const generateGalaxy = () => {
     positions[i3 + 1] = randomY;
     positions[i3 + 2] = Math.sin(branchAngle) * radius + randomZ;
 
-    //=== Color
+    //===== Color
     const mixedColor = insideColor.clone();
     mixedColor.lerp(outsideColor, radius / parameters.radius);
 
     colors[i3] = mixedColor.r;
     colors[i3 + 1] = mixedColor.g;
     colors[i3 + 2] = mixedColor.b;
+
+    //===== Scale
+    scales[i] = Math.random();
   }
 
   geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
   geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+  geometry.setAttribute('aScale', new THREE.BufferAttribute(scales, 1));
 
   //============== Material
   material = new THREE.ShaderMaterial({
@@ -99,6 +105,11 @@ const generateGalaxy = () => {
 
     vertexShader: vertexGalaxy,
     fragmentShader: fragmentGalaxy,
+  
+
+    uniforms: {
+      uSize: { value: 8 * renderer.getPixelRatio() },
+    },
   });
 
   //============== Point
@@ -106,14 +117,11 @@ const generateGalaxy = () => {
   scene.add(points);
 };
 
-generateGalaxy();
 debugGUI(parameters, generateGalaxy);
 
 //=================== Camera =======================
 const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 100);
-camera.position.x = 3;
-camera.position.y = 3;
-camera.position.z = 3;
+camera.position.set(3, 3, 3);
 scene.add(camera);
 
 //============== Orbit Controls ====================
@@ -127,6 +135,9 @@ const renderer = new THREE.WebGLRenderer({
 });
 renderer.setSize(width, height);
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+// To getPixelRatio in uniforms we call it here
+generateGalaxy();
 
 //============== Resize Listener ===================
 let resizeTimeout;
