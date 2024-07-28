@@ -10,7 +10,7 @@
  <br/>
 
 
-## Animated Galaxy
+## Animated Galaxy using custom shaders
 <!--------- Video --------->
 
 https://github.com/user-attachments/assets/6e8fe72d-d1ca-4773-b457-9c6c2725c975
@@ -33,7 +33,7 @@ https://github.com/user-attachments/assets/6e8fe72d-d1ca-4773-b457-9c6c2725c975
 #### 3. Real-time Rendering: <br/>
    - Ensures smooth and interactive visualization of the galaxy.
 #### 4. Performance Enhancements: <br/>
-   - Includes ambient storm sound for an enhanced immersive experience.
+   - Optimized rendering techniques to maintain high performance and smooth interactions even with complex visuals.
 
 <br/>
 
@@ -42,7 +42,7 @@ https://github.com/user-attachments/assets/6e8fe72d-d1ca-4773-b457-9c6c2725c975
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; For rendering 3D graphics and handling particle systems.
 
 > ### 2. GLSL: <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Custom shaders for creating the sea and wave effects.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Custom shaders for creating and animating the galaxy and its dynamic visual effects.
 
 > ### 3. HTML/CSS/JavaScript: <br/>
 &nbsp;&nbsp;&nbsp; Standard web technologies for structuring and styling the project.
